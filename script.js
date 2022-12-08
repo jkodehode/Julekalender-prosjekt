@@ -38,19 +38,40 @@ setInterval(countdown, 1000);
 const hovedSkjerm = document.querySelector("#skjerm");
 const lukene = document.querySelectorAll(".luke");
 
-//* Legge inn en API
-const jokeApi = new XMLHttpRequest();
+//* Legge inn en API . Fjernet denne da den ikke fungerte OG siden det er bedre med Async/Await
+// const jokeApi = new XMLHttpRequest();
 
-jokeApi.open("GET", "https://v2.jokeapi.dev/joke/Christmas", true);
+// jokeApi.open("GET", "https://v2.jokeapi.dev/joke/Christmas", true);
 
-jokeApi.onload = function () {
-  const data = JSON.parse(this.response);
-  data.forEach((joke) => {
-    hovedSkjerm.innerText = joke.setup;
-  });
+// jokeApi.onload = function () {
+//   const data = JSON.parse(this.response);
+//   data.forEach((joke) => {
+//     hovedSkjerm.innerText = joke.setup;
+//   });
+// };
+
+// jokeApi.send();
+
+//* Async/await API
+async function getResponse() {
+  const response = await fetch("https://v2.jokeapi.dev/joke/Christmas");
+  const data = await response.json();
+
+  return data;
+}
+
+const deliveryElement = document.createElement("p");
+const respons = () => {
+  getResponse().then(
+    (data) => (
+      (hovedSkjerm.innerText = data.setup),
+      hovedSkjerm.append(deliveryElement),
+      (deliveryElement.innerText = data.delivery),
+      (deliveryElement.style =
+        "color: white; font-size: 25px; margin-top: 10px")
+    )
+  );
 };
-
-jokeApi.send();
 
 // 1. lage en loop som henter ut lukene for oss, som indekser.
 // - brukte først en forEach for å fange de.
@@ -69,33 +90,51 @@ jokeApi.send();
 // Bruke en if som sjekker index? hvis brukt sender ny?
 
 //* Henter ut de unike lukene på lettvin måte. Vi gjør det først enkelt og funksjonelt.
+
+//* Legg inn gifer her:
+//<iframe src="https://giphy.com/embed/xTk9ZzD6NuYrMuDBx6" width="480" height="441" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/afv-funny-fail-lol-xTk9ZzD6NuYrMuDBx6">via GIPHY</a></p>
+//<iframe src="https://giphy.com/embed/UVeNzU2qyZ9YvPNfIF" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/albertheijn-ah-albert-heijn-UVeNzU2qyZ9YvPNfIF">via GIPHY</a></p>
+//https://media1.giphy.com/media/UVeNzU2qyZ9YvPNfIF/giphy.gif
+//https://media2.giphy.com/media/l49JNT3gorRiYJfNe/giphy.gif
+// https://media1.giphy.com/media/l3vRkS8dP411iHQu4/giphy.gif
+//https://media4.giphy.com/media/UxYAy451ySnZJtkjxb/giphy.gif
+
+//https://youtu.be/kW6igha9eJ8
+
 lukene[0].addEventListener("click", () => {
-  hovedSkjerm.innerText = "Luke 1";
+  // hovedSkjerm.innerText = "Luke 1";
+  respons();
   lukene[0].innerText = "";
   lukene[0].style.backgroundImage = "url('./images/Gift01.png')";
 });
 lukene[1].addEventListener("click", () => {
-  hovedSkjerm.innerText = "Luke 2";
+  // hovedSkjerm.innerText = "Luke 2";
+  respons();
   lukene[1].innerText = "";
   lukene[1].style.backgroundImage = "url('./images/Gift02.png')";
 });
 lukene[2].addEventListener("click", () => {
-  hovedSkjerm.innerText = "Luke 3";
+  // hovedSkjerm.innerText = "Luke 3";
+  respons();
   lukene[2].innerText = "";
   lukene[2].style.backgroundImage = "url('./images/Gift03.png')";
 });
 lukene[3].addEventListener("click", () => {
-  hovedSkjerm.innerText = "Luke 4";
+  // hovedSkjerm.innerText = "Luke 4";
+  respons();
   lukene[3].innerText = "";
   lukene[3].style.backgroundImage = "url('./images/Gift04.png')";
 });
 lukene[4].addEventListener("click", () => {
-  hovedSkjerm.innerText = "Luke 5";
+  hovedSkjerm.innerHTML = `<iframe src="https://giphy.com/embed/xTk9ZzD6NuYrMuDBx6" width="120" height="100" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>`;
   lukene[4].innerText = "";
   lukene[4].style.backgroundImage = "url('./images/Gift05.png')";
 });
 lukene[5].addEventListener("click", () => {
-  hovedSkjerm.innerText = "Luke 6";
+  hovedSkjerm.style.backgroundImage =
+    "url('https://media1.giphy.com/media/l3vRkS8dP411iHQu4/giphy.gif')";
+  hovedSkjerm.style.backgroundSize = "cover";
+  hovedSkjerm.style.backgroundPosition = "center";
   lukene[5].innerText = "";
   lukene[5].style.backgroundImage = "url('./images/Gift06.png')";
 });
@@ -191,3 +230,22 @@ lukene[23].addEventListener("click", () => {
 });
 
 function kallPaKnapp(IndreTekst) {}
+
+// her lager du referenase til knappen
+const openAll = document.querySelector("#alleKnapper");
+
+// openAll.addEventListener("click", () => {
+//   alert("Too eary for that");
+// });
+
+// her lager du hva som skjer når den trykkes på: openAll.addEventListner....
+
+//* Kode til knappen som refresher nettsiden og gir en "ny" kalender.
+// location.reload();
+//Gif til alert
+
+const refreshBtn = document.querySelector("#nyKalender");
+
+refreshBtn.addEventListener("click", () => {
+  location.reload();
+});
