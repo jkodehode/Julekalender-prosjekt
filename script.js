@@ -38,20 +38,6 @@ setInterval(countdown, 1000);
 const hovedSkjerm = document.querySelector("#skjerm");
 const lukene = document.querySelectorAll(".luke");
 
-//* Legge inn en API . Fjernet denne da den ikke fungerte OG siden det er bedre med Async/Await
-// const jokeApi = new XMLHttpRequest();
-
-// jokeApi.open("GET", "https://v2.jokeapi.dev/joke/Christmas", true);
-
-// jokeApi.onload = function () {
-//   const data = JSON.parse(this.response);
-//   data.forEach((joke) => {
-//     hovedSkjerm.innerText = joke.setup;
-//   });
-// };
-
-// jokeApi.send();
-
 //* Async/await API
 async function getResponse() {
   const response = await fetch("https://v2.jokeapi.dev/joke/Christmas");
@@ -135,21 +121,34 @@ lukene[5].addEventListener("click", () => {
     "url('https://media1.giphy.com/media/l3vRkS8dP411iHQu4/giphy.gif')";
   hovedSkjerm.style.backgroundSize = "cover";
   hovedSkjerm.style.backgroundPosition = "center";
+  hovedSkjerm.innerText = "";
   lukene[5].innerText = "";
   lukene[5].style.backgroundImage = "url('./images/Gift06.png')";
 });
 lukene[6].addEventListener("click", () => {
-  hovedSkjerm.innerText = "Luke 7";
+  hovedSkjerm.style.backgroundImage =
+    "url('https://media2.giphy.com/media/l49JNT3gorRiYJfNe/giphy.gif')";
+  hovedSkjerm.style.backgroundSize = "cover";
+  hovedSkjerm.style.backgroundPosition = "center";
+  hovedSkjerm.innerText = "";
   lukene[6].innerText = "";
   lukene[6].style.backgroundImage = "url('./images/Gift07.png')";
 });
 lukene[7].addEventListener("click", () => {
-  hovedSkjerm.innerText = "Luke 8";
+  hovedSkjerm.style.backgroundImage =
+    "url('https://media1.giphy.com/media/UVeNzU2qyZ9YvPNfIF/giphy.gif')";
+  hovedSkjerm.style.backgroundSize = "cover";
+  hovedSkjerm.style.backgroundPosition = "center";
+  hovedSkjerm.innerText = "";
   lukene[7].innerText = "";
   lukene[7].style.backgroundImage = "url('./images/Gift08.png')";
 });
 lukene[8].addEventListener("click", () => {
-  hovedSkjerm.innerText = "Luke 9";
+  hovedSkjerm.style.backgroundImage =
+    "url('https://media4.giphy.com/media/UxYAy451ySnZJtkjxb/giphy.gif')";
+  hovedSkjerm.style.backgroundSize = "cover";
+  hovedSkjerm.style.backgroundPosition = "bottom";
+  hovedSkjerm.innerText = "";
   lukene[8].innerText = "";
   lukene[8].style.backgroundImage = "url('./images/Gift09.png')";
 });
@@ -224,7 +223,15 @@ lukene[22].addEventListener("click", () => {
   lukene[22].style.backgroundImage = "url('./images/Gift23.png')";
 });
 lukene[23].addEventListener("click", () => {
-  hovedSkjerm.innerText = "Luke 24";
+  hovedSkjerm.innerHTML = `
+  <iframe
+    frameborder="0"
+    height="100%"
+    width="100%"
+    src="https://www.youtube.com/embed/XO77Fib9tSI?controls=0"
+  >
+  </iframe>
+`;
   lukene[23].innerText = "";
   lukene[23].style.backgroundImage = "url('./images/GiftLast.png')";
 });
@@ -234,9 +241,9 @@ function kallPaKnapp(IndreTekst) {}
 // her lager du referenase til knappen
 const openAll = document.querySelector("#alleKnapper");
 
-// openAll.addEventListener("click", () => {
-//   alert("Too eary for that");
-// });
+openAll.addEventListener("click", () => {
+  alert("Too eary for that");
+});
 
 // her lager du hva som skjer når den trykkes på: openAll.addEventListner....
 

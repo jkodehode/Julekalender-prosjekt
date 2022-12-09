@@ -146,7 +146,7 @@ main {
   color: rgba(255, 199, 59, 1);
   font-family: "Lilita One", cursive;
   letter-spacing: 2px;
-  max-width: 95%;
+  width: 600px;
 }
 
 .nr1 {
